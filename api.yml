@@ -1,0 +1,61 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Microservice for upload songs
+  description: NodeJs + MongoDB
+  license:
+    name: Software Architecture, 2019-I
+host: 192.168.99.101:3002
+basePath: /
+schemes:
+  - http
+consumes:
+  - audio/mp3
+produces:
+  - application/json
+paths:
+  /tracks:
+    post:
+      summary: Creates a new song
+      operationId: createSong
+      parameters:
+        - name: track
+          in: body
+          required: true
+          description: Track Object
+          schema:
+            $ref: '#/definitions/TrackInput'
+      responses:
+        '201':
+          description: File uploaded successfully, stored under Mongo ObjectID...
+        '500':
+          description: Error uploading file
+          schema:
+            $ref: '#/definitions/ErrorModel'
+definitions:
+
+  TrackInput:
+    type: object
+    properties:
+      name:
+        type: string
+      track:
+        type: string
+        format: binary  # binary file contents
+
+# Errors
+  ErrorModel:
+    type: object
+    required:
+      - name
+      - track
+    properties:
+      name:
+        type: string
+      track:
+        type: string
+        format: binary
+      description:
+        type: object

@@ -1,0 +1,16 @@
+{
+  "name": "upload_songs_ms",
+  "version": "1.0.0",
+  "description": "An upload song's microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Higuera",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.2.4",
+    "multer": "^1.4.1"
+  }
+}
