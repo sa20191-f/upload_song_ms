@@ -6,10 +6,3 @@ services:
     build: .
     ports:
       - "3002:3002"
-    links:
-      - upload_song_db
-  upload_song_db:
-    container_name: upload_song_db
-    image: mongo
-    ports:
-      - "27017:27017"
