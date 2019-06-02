@@ -4,20 +4,24 @@ const app = express()
 const multer = require('multer');
 fs = require('fs-extra')
 app.use(bodyParser.urlencoded({extended: true}))
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '/home/app/songs')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, file.fieldname + '-' + Date.now()+'.mp3')
   }
 })
 
 var upload = multer({ storage: storage })
 
 app.get('/getfile/:id',function(req,res){
-  res.sendFile('/home/songs/'+req.params.id);
+  res.download('/home/app/songs/'+req.params.id);
 
 });
 
